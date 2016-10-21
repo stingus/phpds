@@ -10,9 +10,10 @@ This library implements commonly used data structures in PHP.
 
 - Doubly Linked List
 - Stacks
-- Queues (soon)
+- Queues
 - Priority Queues (soon)
 - Binary Search Tree (soon)
+- Min / Max Heaps (soon)
 - AVL tree (soon)
 - Splay tree (soon)
 
