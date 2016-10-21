@@ -55,7 +55,7 @@ class LinkedList implements LinkedListInterface
     /**
      * @inheritDoc
      */
-    public function insert($data, $position = LinkedListInterface::FIRST)
+    public function insert($data, $position = self::FIRST)
     {
         switch ($position) {
             case static::FIRST:
