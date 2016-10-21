@@ -43,6 +43,10 @@ class LinkedList implements LinkedListInterface
      */
     private $size = 0;
 
+    /**
+     * LinkedList constructor.
+     * @param string $dataType Data type class, instance of PHPdt\DataType\DataTypeInterface
+     */
     public function __construct($dataType)
     {
         $this->dataType = $dataType;
