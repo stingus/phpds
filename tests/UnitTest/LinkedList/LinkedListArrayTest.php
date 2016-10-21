@@ -5,6 +5,7 @@ namespace PHPds\UnitTest\LinkedList;
 use PHPds\LinkedList\LinkedList;
 use PHPds\LinkedList\LinkedListArray;
 use PHPds\LinkedList\LinkedListInterface as LLI;
+use PHPds\UnitTest\Dummy\DummyClass;
 use PHPUnit_Framework_TestCase;
 
 /**
@@ -16,10 +17,10 @@ class LinkedListArrayTest extends PHPUnit_Framework_TestCase
 {
     public function testArrayHasKey()
     {
-        $list = new LinkedList();
-        $list->insert(new \stdClass());
-        $list->insert(new \stdClass());
-        $list->insert(new \stdClass());
+        $list = new LinkedList(DummyClass::class);
+        $list->insert(new DummyClass());
+        $list->insert(new DummyClass());
+        $list->insert(new DummyClass());
         $array = new LinkedListArray($list);
         $this->assertArrayHasKey(0, $array);
         $this->assertArrayHasKey(1, $array);
@@ -28,28 +29,28 @@ class LinkedListArrayTest extends PHPUnit_Framework_TestCase
 
     public function testArrayNotHasKey()
     {
-        $list = new LinkedList();
-        $list->insert(new \stdClass());
-        $list->insert(new \stdClass());
-        $list->insert(new \stdClass());
+        $list = new LinkedList(DummyClass::class);
+        $list->insert(new DummyClass());
+        $list->insert(new DummyClass());
+        $list->insert(new DummyClass());
         $array = new LinkedListArray($list);
         $this->assertArrayNotHasKey(3, $array);
     }
 
     public function testArrayGetNode()
     {
-        $list = new LinkedList();
-        $list->insert(new \stdClass());
-        $node = $list->insert(new \stdClass());
-        $list->insert(new \stdClass());
+        $list = new LinkedList(DummyClass::class);
+        $list->insert(new DummyClass());
+        $node = $list->insert(new DummyClass());
+        $list->insert(new DummyClass());
         $array = new LinkedListArray($list);
         $this->assertSame($node, $array[1]);
     }
 
     public function testArrayGetNonExistentNode()
     {
-        $list = new LinkedList();
-        $list->insert(new \stdClass());
+        $list = new LinkedList(DummyClass::class);
+        $list->insert(new DummyClass());
         $array = new LinkedListArray($list);
         $this->assertNull($array[1]);
     }
@@ -61,47 +62,47 @@ class LinkedListArrayTest extends PHPUnit_Framework_TestCase
     public function testArrayGetWithInvalidKey($data)
     {
         $this->expectException('PHPds\\LinkedList\\Exceptions\\InvalidNodeIndexException');
-        $array = new LinkedListArray(new LinkedList());
+        $array = new LinkedListArray(new LinkedList(DummyClass::class));
         $array->offsetGet($data);
     }
 
     public function testArraySetFirst()
     {
-        $list = new LinkedList();
-        $list->insert(new \stdClass());
-        $list->insert(new \stdClass());
+        $list = new LinkedList(DummyClass::class);
+        $list->insert(new DummyClass());
+        $list->insert(new DummyClass());
         $array = new LinkedListArray($list);
-        $node = $array->offsetSet(0, new \stdClass());
+        $node = $array->offsetSet(0, new DummyClass());
         $this->assertSame($node, $array[0]);
     }
 
     public function testArraySetFirstOnEmptyList()
     {
-        $list = new LinkedList();
+        $list = new LinkedList(DummyClass::class);
         $array = new LinkedListArray($list);
-        $node = $array->offsetSet(0, new \stdClass());
+        $node = $array->offsetSet(0, new DummyClass());
         $this->assertNotNull($node);
         $this->assertSame($node, $array[0]);
     }
 
     public function testArraySetMiddle()
     {
-        $list = new LinkedList();
-        $list->insert(new \stdClass());
-        $list->insert(new \stdClass());
-        $list->insert(new \stdClass());
+        $list = new LinkedList(DummyClass::class);
+        $list->insert(new DummyClass());
+        $list->insert(new DummyClass());
+        $list->insert(new DummyClass());
         $array = new LinkedListArray($list);
-        $node = $array->offsetSet(1, new \stdClass());
+        $node = $array->offsetSet(1, new DummyClass());
         $this->assertSame($node, $array[1]);
     }
 
     public function testArraySetLast()
     {
-        $list = new LinkedList();
-        $list->insert(new \stdClass());
-        $list->insert(new \stdClass());
+        $list = new LinkedList(DummyClass::class);
+        $list->insert(new DummyClass());
+        $list->insert(new DummyClass());
         $array = new LinkedListArray($list);
-        $node = $array->offsetSet(2, new \stdClass());
+        $node = $array->offsetSet(2, new DummyClass());
         $this->assertNotNull($node);
         $this->assertSame($node, $array[2]);
     }
@@ -109,18 +110,18 @@ class LinkedListArrayTest extends PHPUnit_Framework_TestCase
     public function testArraySetOutOfBounds()
     {
         $this->expectException('PHPds\\LinkedList\\Exceptions\\OutOfBoundsIndexException');
-        $list = new LinkedList();
-        $list->insert(new \stdClass());
-        $list->insert(new \stdClass());
+        $list = new LinkedList(DummyClass::class);
+        $list->insert(new DummyClass());
+        $list->insert(new DummyClass());
         $array = new LinkedListArray($list);
-        $array->offsetSet(3, new \stdClass());
+        $array->offsetSet(3, new DummyClass());
     }
 
     public function testArrayUnsetFirst()
     {
-        $list = new LinkedList();
-        $node = $list->insert(new \stdClass());
-        $list->insert(new \stdClass());
+        $list = new LinkedList(DummyClass::class);
+        $node = $list->insert(new DummyClass());
+        $list->insert(new DummyClass());
         $array = new LinkedListArray($list);
         $array->offsetUnset(0);
         $this->assertCount(1, $list);
@@ -131,10 +132,10 @@ class LinkedListArrayTest extends PHPUnit_Framework_TestCase
 
     public function testArrayUnsetMiddle()
     {
-        $list = new LinkedList();
-        $node1 = $list->insert(new \stdClass());
-        $list->insert(new \stdClass());
-        $node2 = $list->insert(new \stdClass());
+        $list = new LinkedList(DummyClass::class);
+        $node1 = $list->insert(new DummyClass());
+        $list->insert(new DummyClass());
+        $node2 = $list->insert(new DummyClass());
         $array = new LinkedListArray($list);
         $array->offsetUnset(1);
         $this->assertCount(2, $list);
@@ -150,9 +151,9 @@ class LinkedListArrayTest extends PHPUnit_Framework_TestCase
 
     public function testArrayUnsetLast()
     {
-        $list = new LinkedList();
-        $list->insert(new \stdClass());
-        $node = $list->insert(new \stdClass());
+        $list = new LinkedList(DummyClass::class);
+        $list->insert(new DummyClass());
+        $node = $list->insert(new DummyClass());
         $array = new LinkedListArray($list);
         $array->offsetUnset(1);
         $this->assertCount(1, $list);
@@ -163,9 +164,9 @@ class LinkedListArrayTest extends PHPUnit_Framework_TestCase
 
     public function testArrayUnsetOutOfBounds()
     {
-        $list = new LinkedList();
-        $node1 = $list->insert(new \stdClass());
-        $node2 = $list->insert(new \stdClass());
+        $list = new LinkedList(DummyClass::class);
+        $node1 = $list->insert(new DummyClass());
+        $node2 = $list->insert(new DummyClass());
         $array = new LinkedListArray($list);
         $this->assertFalse($array->offsetUnset(2));
         $this->assertCount(2, $list);
@@ -181,14 +182,14 @@ class LinkedListArrayTest extends PHPUnit_Framework_TestCase
 
     public function testArrayIterate()
     {
-        $list = new LinkedList();
+        $list = new LinkedList(DummyClass::class);
 
         /** @noinspection PhpUnusedLocalVariableInspection */
-        $node1 = $list->insert(new \stdClass());
+        $node1 = $list->insert(new DummyClass());
         /** @noinspection PhpUnusedLocalVariableInspection */
-        $node2 = $list->insert(new \stdClass());
+        $node2 = $list->insert(new DummyClass());
         /** @noinspection PhpUnusedLocalVariableInspection */
-        $node3 = $list->insert(new \stdClass());
+        $node3 = $list->insert(new DummyClass());
         $array = new LinkedListArray($list);
         $i = 3;
         foreach ($array as $node) {
@@ -198,20 +199,20 @@ class LinkedListArrayTest extends PHPUnit_Framework_TestCase
 
     public function testArrayCurrentFirst()
     {
-        $list = new LinkedList();
-        $list->insert(new \stdClass());
-        $list->insert(new \stdClass());
-        $node = $list->insert(new \stdClass());
+        $list = new LinkedList(DummyClass::class);
+        $list->insert(new DummyClass());
+        $list->insert(new DummyClass());
+        $node = $list->insert(new DummyClass());
         $array = new LinkedListArray($list);
         $this->assertSame($node, $array->current());
     }
 
     public function testArrayCurrentMiddle()
     {
-        $list = new LinkedList();
-        $list->insert(new \stdClass());
-        $node = $list->insert(new \stdClass());
-        $list->insert(new \stdClass());
+        $list = new LinkedList(DummyClass::class);
+        $list->insert(new DummyClass());
+        $node = $list->insert(new DummyClass());
+        $list->insert(new DummyClass());
         $array = new LinkedListArray($list);
         $array->next();
         $this->assertSame($node, $array->current());
@@ -219,10 +220,10 @@ class LinkedListArrayTest extends PHPUnit_Framework_TestCase
 
     public function testArrayCurrentLast()
     {
-        $list = new LinkedList();
-        $node = $list->insert(new \stdClass());
-        $list->insert(new \stdClass());
-        $list->insert(new \stdClass());
+        $list = new LinkedList(DummyClass::class);
+        $node = $list->insert(new DummyClass());
+        $list->insert(new DummyClass());
+        $list->insert(new DummyClass());
         $array = new LinkedListArray($list);
         $array->next();
         $array->next();
@@ -231,10 +232,10 @@ class LinkedListArrayTest extends PHPUnit_Framework_TestCase
 
     public function testArrayReset()
     {
-        $list = new LinkedList();
-        $list->insert(new \stdClass());
-        $list->insert(new \stdClass());
-        $node = $list->insert(new \stdClass());
+        $list = new LinkedList(DummyClass::class);
+        $list->insert(new DummyClass());
+        $list->insert(new DummyClass());
+        $node = $list->insert(new DummyClass());
         $array = new LinkedListArray($list);
         $array->next();
         $array->next();
@@ -245,10 +246,10 @@ class LinkedListArrayTest extends PHPUnit_Framework_TestCase
 
     public function testArrayCurrentKey()
     {
-        $list = new LinkedList();
-        $list->insert(new \stdClass());
-        $list->insert(new \stdClass());
-        $list->insert(new \stdClass());
+        $list = new LinkedList(DummyClass::class);
+        $list->insert(new DummyClass());
+        $list->insert(new DummyClass());
+        $list->insert(new DummyClass());
         $array = new LinkedListArray($list);
         for ($j = 0; $j < $list->count(); $j++) {
             $this->assertSame($j, $array->key());
@@ -259,7 +260,7 @@ class LinkedListArrayTest extends PHPUnit_Framework_TestCase
     public function invalidKeyProvider()
     {
         return [
-            [new \stdClass()],
+            [new DummyClass()],
             ['abc'],
             [''],
             [-123],

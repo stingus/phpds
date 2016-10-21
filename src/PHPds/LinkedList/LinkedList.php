@@ -5,6 +5,7 @@ namespace PHPds\LinkedList;
 use PHPds\LinkedList\Exceptions\InvalidNodeIndexException;
 use PHPds\LinkedList\Exceptions\InvalidNodePositionException;
 use PHPds\LinkedList\Exceptions\OutOfBoundsIndexException;
+use PHPdt\DataType\ValidationTypeTrait;
 
 /**
  * Class LinkedList
@@ -12,6 +13,8 @@ use PHPds\LinkedList\Exceptions\OutOfBoundsIndexException;
  */
 class LinkedList implements LinkedListInterface
 {
+    use ValidationTypeTrait;
+
     /**
      * LinkedList first Node
      *
@@ -27,18 +30,29 @@ class LinkedList implements LinkedListInterface
     private $last;
 
     /**
+     * LinkedList data type
+     *
+     * @var string
+     */
+    private $dataType;
+
+    /**
      * LinkedList size
      *
      * @var int
      */
     private $size = 0;
 
+    public function __construct($dataType)
+    {
+        $this->dataType = $dataType;
+    }
+
     /**
      * @inheritDoc
      */
     public function insert($data, $position = LinkedListInterface::FIRST)
     {
-
         switch ($position) {
             case static::FIRST:
                 $current = $this->first;
@@ -262,6 +276,8 @@ class LinkedList implements LinkedListInterface
      */
     private function createNode($data, NodeInterface $current = null)
     {
+        $this->validateType($data, $this->dataType);
+
         $node = new Node($data);
 
         if ($this->size === 0) {
