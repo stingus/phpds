@@ -2,8 +2,8 @@
 
 namespace PHPds\Stack;
 
-use PHPdt\DataType\Exceptions\DataTypeImplementationException;
-use PHPdt\DataType\ValidationTypeTrait;
+use PHPds\LinkedList\LinkedList;
+use PHPds\LinkedList\LinkedListArray;
 
 /**
  * Class Stack.
@@ -13,33 +13,16 @@ use PHPdt\DataType\ValidationTypeTrait;
  */
 class Stack implements StackInterface, \Countable
 {
-    use ValidationTypeTrait;
+    /** @var LinkedList */
+    private $list;
 
     /**
-     * Data type of the stack elements
-     *
-     * @var string
-     */
-    private $dataType;
-
-    /**
-     * Stack data
-     *
-     * @var array
-     */
-    private $data;
-
-    /**
-     * StackInterface constructor.
-     * Data type can be any DataTypeInterface object
-     *
-     * @param string $dataType
-     * @throws DataTypeImplementationException
+     * Stack constructor.
+     * @param string $dataType Data type class, instance of PHPdt\DataType\DataTypeInterface
      */
     public function __construct($dataType)
     {
-        $this->dataType = $dataType;
-        $this->data = [];
+        $this->list = new LinkedList($dataType);
     }
 
     /**
@@ -47,8 +30,7 @@ class Stack implements StackInterface, \Countable
      */
     public function push($data)
     {
-        $this->validateType($data, $this->dataType);
-        return $this->data[] = $data;
+        return $this->list->insert($data, LinkedList::LAST)->getData();
     }
 
     /**
@@ -56,7 +38,7 @@ class Stack implements StackInterface, \Countable
      */
     public function pop()
     {
-        return array_pop($this->data);
+        return $this->list->pop(LinkedList::LAST)->getData();
     }
 
     /**
@@ -64,7 +46,7 @@ class Stack implements StackInterface, \Countable
      */
     public function peek()
     {
-        return end($this->data);
+        return $this->list->peek(LinkedList::LAST)->getData();
     }
 
     /**
@@ -72,7 +54,14 @@ class Stack implements StackInterface, \Countable
      */
     public function has($data)
     {
-        return in_array($data, $this->data, true);
+        $iterator = new LinkedListArray($this->list);
+        while ($iterator->valid()) {
+            if ($iterator->current()->getData() === $data) {
+                return true;
+            }
+            $iterator->next();
+        }
+        return false;
     }
 
     /**
@@ -80,6 +69,6 @@ class Stack implements StackInterface, \Countable
      */
     public function count()
     {
-        return count($this->data);
+        return $this->list->count();
     }
 }

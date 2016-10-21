@@ -1,5 +1,5 @@
 ### Stack usage
-The stack is a strong-typed, LIFO structure. It is based on the PHP array data
+The stack is a strong-typed, LIFO structure. It is based on the doubly LinkedList data
 type and PHPdt for setting the stack data type.
 
 The stack is constructed with `new Stack(DataTypeInterface::class)`, where the

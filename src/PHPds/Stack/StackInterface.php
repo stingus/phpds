@@ -3,7 +3,6 @@
 namespace PHPds\Stack;
 
 use PHPdt\DataType\DataTypeInterface;
-use PHPdt\DataType\Exceptions\InvalidDataTypeException;
 
 /**
  * Interface StackInterface
@@ -15,8 +14,7 @@ interface StackInterface
      * Push an element at the end of the stack
      *
      * @param mixed $data
-     * @return bool True if data is pushed
-     * @throws InvalidDataTypeException
+     * @return mixed $data
      */
     public function push($data);
 
