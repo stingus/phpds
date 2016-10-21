@@ -2,18 +2,16 @@
 
 namespace PHPds\UnitTest\Stack;
 
-use PHPds\UnitTest\Dummy\DummyClass;
-use PHPdt\DataType\ArrayDataType;
-use PHPdt\DataType\BoolDataType;
-use PHPdt\DataType\DoubleDataType;
 use PHPdt\DataType\IntDataType;
-use PHPdt\DataType\StringDataType;
 use PHPds\Stack\Stack;
+use PHPds\UnitTest\DataProvider\DataProviderTrait;
 
 class StackTest extends \PHPUnit_Framework_TestCase
 {
+    use DataProviderTrait;
+
     /**
-     * @dataProvider stackItemProvider
+     * @dataProvider typedDataProvider
      * @param $item
      */
     public function testStackPush($item)
@@ -26,7 +24,7 @@ class StackTest extends \PHPUnit_Framework_TestCase
     }
 
     /**
-     * @dataProvider stackItemProvider
+     * @dataProvider typedDataProvider
      * @param $item
      */
     public function testStackPeek($item)
@@ -53,7 +51,7 @@ class StackTest extends \PHPUnit_Framework_TestCase
     }
 
     /**
-     * @dataProvider stackItemProvider
+     * @dataProvider typedDataProvider
      * @param $item
      */
     public function testStackHas($item)
@@ -90,53 +88,5 @@ class StackTest extends \PHPUnit_Framework_TestCase
         $stack->pop();
         $stack->pop();
         $this->assertCount(0, $stack);
-    }
-
-    public function stackItemProvider()
-    {
-        return [
-            [
-                [
-                    'type' => IntDataType::class,
-                    'data' => [-1, 0, 1],
-                    'miss' => 2
-                ]
-            ],
-            [
-                [
-                    'type' => DoubleDataType::class,
-                    'data' => [-1.0, -.1, 0.0, 0.1, 1.0],
-                    'miss' => 2.0
-                ]
-            ],
-            [
-                [
-                    'type' => StringDataType::class,
-                    'data' => ['a', 'A', '!', '#', '$', '.', '\'', '"', '/'],
-                    'miss' => 'z'
-                ]
-            ],
-            [
-                [
-                    'type' => BoolDataType::class,
-                    'data' => [true, false],
-                    'miss' => null
-                ]
-            ],
-            [
-                [
-                    'type' => ArrayDataType::class,
-                    'data' => [[1, 2, 3], ['a', 'b', 'c']],
-                    'miss' => [1, 2]
-                ]
-            ],
-            [
-                [
-                    'type' => DummyClass::class,
-                    'data' => [new DummyClass(), new DummyClass()],
-                    'miss' => new DummyClass()
-                ]
-            ]
-        ];
     }
 }
