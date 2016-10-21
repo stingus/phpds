@@ -3,7 +3,6 @@
 namespace PHPds\Queue;
 
 use PHPdt\DataType\DataTypeInterface;
-use PHPdt\DataType\Exceptions\InvalidDataTypeException;
 
 /**
  * Interface QueueInterface
@@ -16,7 +15,6 @@ interface QueueInterface
      *
      * @param mixed $data
      * @return mixed $data
-     * @throws InvalidDataTypeException
      */
     public function enqueue($data);
 
