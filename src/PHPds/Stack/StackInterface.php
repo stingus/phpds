@@ -2,13 +2,14 @@
 
 namespace PHPds\Stack;
 
+use PHPds\DataList\DataListInterface;
 use PHPdt\DataType\DataTypeInterface;
 
 /**
  * Interface StackInterface
  * @package PHPds\Stack
  */
-interface StackInterface
+interface StackInterface extends DataListInterface
 {
     /**
      * Push an element at the end of the stack
@@ -24,20 +25,4 @@ interface StackInterface
      * @return DataTypeInterface
      */
     public function pop();
-
-    /**
-     * Get the last element of the stack
-     *
-     * @return DataTypeInterface
-     */
-    public function peek();
-
-    /**
-     * Check whether the data is present in the stack.
-     * The comparison is strict!
-     *
-     * @param mixed $data
-     * @return bool
-     */
-    public function has($data);
 }

@@ -2,13 +2,14 @@
 
 namespace PHPds\Queue;
 
+use PHPds\DataList\DataListInterface;
 use PHPdt\DataType\DataTypeInterface;
 
 /**
  * Interface QueueInterface
  * @package PHPds\Queue
  */
-interface QueueInterface
+interface QueueInterface extends DataListInterface
 {
     /**
      * Add an element at the end of the queue
@@ -24,20 +25,4 @@ interface QueueInterface
      * @return DataTypeInterface
      */
     public function dequeue();
-
-    /**
-     * Get the first element in line
-     *
-     * @return DataTypeInterface
-     */
-    public function peek();
-
-    /**
-     * Check whether the data is present in the queue.
-     * The comparison is strict!
-     *
-     * @param mixed $data
-     * @return bool
-     */
-    public function has($data);
 }
